@@ -1,20 +1,11 @@
 // mysql.js - The Database Connection Pool Module
-const fs = require('fs');
-const path = require('path');
-
-const currentDir = __dirname;
-
-// Path to the SQL file in the same folder
-const sqlFilePath = path.join(currentDir, 'HW5.sql');
-
-// Read the SQL file
-const sqlQuery = fs.readFileSync(sqlFilePath, 'utf8');
+const mysql = require('mysql2/promise');
 
 // Configuration details
 const dbConfig = {
     host: "localhost",
     user: "root",
-    password: "521Annadale!", 
+    password: "password", 
     database: "hw5",
     // Connection Pool settings are optional but good practice
     waitForConnections: true, 
@@ -23,7 +14,7 @@ const dbConfig = {
 };
 
 // Create and export the connection pool
-const pool = sqlQuery.createPool(dbConfig);
+const pool = mysql.createPool(dbConfig);
 
 // A simple check to ensure the pool is working on startup
 pool.getConnection()
